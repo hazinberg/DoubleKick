@@ -50,7 +50,7 @@ public class EnemyManager : MonoBehaviour
         if (attackingEnemy == null)
             yield break;
             
-        yield return new WaitUntil(()=>attackingEnemy.IsRetreating() == false);
+        yield return new WaitUntil(()=>attackingEnemy.IsRetreating() == false);      // враг отступает 
         yield return new WaitUntil(() => attackingEnemy.IsLockedTarget() == false);
         yield return new WaitUntil(() => attackingEnemy.IsStunned() == false);
 

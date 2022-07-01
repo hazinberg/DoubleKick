@@ -38,6 +38,10 @@ public class EnemyScript : MonoBehaviour
     public UnityEvent<EnemyScript> OnStopMoving;
     public UnityEvent<EnemyScript> OnRetreat;
 
+    public void Ppp() {
+        //Debug.Log("Combat Script ------- AttackCheck()");
+    }
+
     void Start()
     {
         enemyManager = GetComponentInParent<EnemyManager>();
@@ -85,7 +89,7 @@ public class EnemyScript : MonoBehaviour
         transform.LookAt(new Vector3(playerCombat.transform.position.x, transform.position.y, playerCombat.transform.position.z));
 
         //Only moves if the direction is set
-        MoveEnemy(moveDirection);
+        MoveEnemy(moveDirection);       //               ====================================================================================================================
     }
 
     //Listened event from Player Animation

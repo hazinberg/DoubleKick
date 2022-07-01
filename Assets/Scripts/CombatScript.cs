@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using DG.Tweening;
 using Cinemachine;
 
+
 public class CombatScript : MonoBehaviour
 {
     private EnemyManager enemyManager;
@@ -52,6 +53,9 @@ public class CombatScript : MonoBehaviour
         impulseSource = GetComponentInChildren<CinemachineImpulseSource>();
     }
 
+
+   
+
     //This function gets called whenever the player inputs the punch action
     void AttackCheck()
     {
@@ -66,10 +70,10 @@ public class CombatScript : MonoBehaviour
                 Attack(null, 0);
                 return;
             }
-            else
-            {
-                lockedTarget = enemyManager.RandomEnemy();
-            }
+            // else
+            // {
+            //     lockedTarget = enemyManager.RandomEnemy();
+            // }
         }
 
         //If the player is moving the movement input, use the "directional" detection to determine the enemy
@@ -78,7 +82,14 @@ public class CombatScript : MonoBehaviour
 
         //Extra check to see if the locked target was set
         if(lockedTarget == null)
-            lockedTarget = enemyManager.RandomEnemy();
+         { 
+            Attack(null, 0);
+            return;
+         }
+            // lockedTarget = enemyManager.RandomEnemy();
+
+        //Debug.Log (lockedTarget.ToString());
+        lockedTarget.GetComponent<EnemyScript>().Ppp();
 
         //AttackTarget
         Attack(lockedTarget, TargetDistance(lockedTarget));
@@ -163,6 +174,7 @@ public class CombatScript : MonoBehaviour
 
     void CounterCheck()
     {
+        //Debug.Log("CounterCheck");
         //Initial check
         if (isCountering || isAttackingEnemy || !enemyManager.AnEnemyIsPreparingAttack())
             return;

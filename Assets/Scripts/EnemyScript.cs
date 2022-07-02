@@ -38,8 +38,17 @@ public class EnemyScript : MonoBehaviour
     public UnityEvent<EnemyScript> OnStopMoving;
     public UnityEvent<EnemyScript> OnRetreat;
 
+    [Header("Audio")]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip[] hitSound;
+
     public void Ppp() {
-        //Debug.Log("Combat Script ------- AttackCheck()");
+        Debug.Log("Combat Script ------- AttackCheck()");
+    }
+
+    void Awake() {
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -120,10 +129,18 @@ public class EnemyScript : MonoBehaviour
 
         IEnumerator HitCoroutine()
         {
-            isStunned = true;
+            PlayHitSound();                         ///////////   Добавляем звук удара
+            
+            isStunned = true;                      
             yield return new WaitForSeconds(.5f);
             isStunned = false;
         }
+    }
+
+    private void PlayHitSound() {
+        audioSource.volume = 0.2f;
+        audioSource.clip = hitSound[Random.Range(0,hitSound.Length)];;
+        audioSource.Play();
     }
 
     void OnPlayerCounter(EnemyScript target)
